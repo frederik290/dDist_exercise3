@@ -1,6 +1,4 @@
-package client;
 
-import res.QA;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,6 +15,8 @@ public class QAClient {
 
     public static void main(String[] args){
         String serverName = args[0];
+        QAClient client = new QAClient();
+        client.run(serverName);
     }
 
     /**
@@ -43,18 +43,26 @@ public class QAClient {
             ClientQAReceiver receiver = new ClientQAReceiver(socket);
             Thread t1 = new Thread(sender);
             Thread t2 = new Thread(receiver);
-            t1.run();
-            t2.run();;
+            t1.start();
+            t2.start();;
             BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
             String question;
             try{
+                QA qa;
                 while((question = stdin.readLine()) != null){
-                    QA qa = new QA();
+                    qa = new QA();
                     qa.setQuestion(question);
                     senderQueue.put(qa);
                 }
-                senderQueue.put(null);
-            }catch (Exception e){}
+
+                System.out.println("Inserting null into queue");
+                qa = new QA();
+                qa.setQuestion(null);
+                senderQueue.put(qa);
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
 
         }

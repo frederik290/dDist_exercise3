@@ -1,11 +1,8 @@
-package server;
-
-import res.QA;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Scanner;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
@@ -24,26 +21,33 @@ public class ServerQASender implements Runnable {
     @Override
     public void run() {
         BufferedReader stdin;
+        Scanner scanner;
         ObjectOutputStream outputStream;
         QA qa = null;
         String answer;
         try{
-            stdin = new BufferedReader(new InputStreamReader(System.in));
+            //stdin = new BufferedReader(new InputStreamReader(System.in));
+            scanner = new Scanner(System.in);
             outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
             while(true) {
                 qa = queue.take();
-                if(qa != null){
+                System.out.println("Waiting?");
+                if(qa.getQuestion() != null){
                     System.out.println("Answer this question: '" + qa.getQuestion() + "':");
-                    answer = stdin.readLine();
+                    answer = scanner.nextLine();
                     qa.setAnswer(answer);
                     outputStream.writeObject(qa);
                 }else{
-                    outputStream.writeObject(null);
+                    qa.setAnswer(null);
+                    outputStream.writeObject(qa);
                     break;
                 }
 
             }
-        } catch (Exception e){}
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        System.out.println("ServerQASender terminated");
 
 
 

@@ -1,7 +1,3 @@
-package server;
-
-import res.QA;
-
 import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -28,9 +24,13 @@ public class ServerQAReceiver implements Runnable {
             while(true){
                 qa = (QA) inputStream.readObject();
                 queue.put(qa);
-                if(qa == null) break;
+                if(qa.getQuestion() == null) break;
             }
 
-        }catch (Exception e){}
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        System.out.println("ServerQAReceiver terminated");
+
     }
 }

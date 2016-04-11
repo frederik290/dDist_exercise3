@@ -1,8 +1,3 @@
-package server;
-
-
-import res.QA;
-
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -19,7 +14,8 @@ public class QAServer {
     private ServerSocket serverSocket;
 
     public static void main(String[] args){
-
+        QAServer server = new QAServer();
+        server.run();
     }
 
     protected void printLocalHostAddress() {
@@ -73,6 +69,7 @@ public class QAServer {
         while(true) {
             Socket clientSocket = waitForConnectionFromClient();
             if(clientSocket != null) {
+                System.out.println("New client connected: " + clientSocket);
                 ArrayBlockingQueue<QA> queue = new ArrayBlockingQueue<QA>(100);
                 ServerQASender sender = new ServerQASender(clientSocket, queue);
                 ServerQAReceiver receiver = new ServerQAReceiver(clientSocket, queue);

@@ -1,9 +1,11 @@
-package res;
-
 /**
  * Created by Jeppe Vinberg on 11-04-2016.
  */
-public class QA {
+import java.io.Serializable;
+
+
+public class QA implements Serializable {
+
     private String question;
     private String answer;
 

@@ -1,6 +1,4 @@
-package client;
 
-import res.QA;
 
 import java.io.ObjectInputStream;
 import java.net.Socket;
@@ -24,11 +22,14 @@ public class ClientQAReceiver implements Runnable {
             QA response = null;
             while(true){
                 response = (QA) inputStream.readObject();
-                if(response == null) break;
+                if(response.getAnswer() == null) break;
                 System.out.println("The answer to question '" + response.getQuestion() + "' is '" + response.getAnswer() + "'.");
             }
 
 
-        } catch (Exception e){}
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        System.out.println("ClientQAReceiver terminated");
     }
 }

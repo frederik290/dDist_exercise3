@@ -1,8 +1,5 @@
-package client;
 
-import res.QA;
 
-import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -30,14 +27,18 @@ public class ClientQASender implements Runnable {
             while (true) {
                 current = queue.take();
                 outputStream.writeObject(current);
-                if (current == null) break;
+                if (current.getQuestion() == null) break;
 
 
             }
 
 
 
-        } catch (Exception e){}
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        System.out.println("ClientQASender terminated");
 
 
         }
