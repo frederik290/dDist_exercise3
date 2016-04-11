@@ -2,6 +2,7 @@
 build/
 bin/
 TEST-RESULT/
+.idea/
 
 
 # Compiled source #
