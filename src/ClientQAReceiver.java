@@ -19,7 +19,7 @@ public class ClientQAReceiver implements Runnable {
     public void run() {
         try{
             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
-            QA response = null;
+            QA response;
             while(true){
                 response = (QA) inputStream.readObject();
                 if(response.getAnswer() == null) break;

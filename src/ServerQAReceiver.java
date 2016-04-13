@@ -18,7 +18,7 @@ public class ServerQAReceiver implements Runnable {
 
     @Override
     public void run() {
-        QA qa = null;
+        QA qa;
         try{
             ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());
             while(true){

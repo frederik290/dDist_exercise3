@@ -13,16 +13,6 @@ public class QAClient {
 
     private int portNumber = 40103;
 
-    public static void main(String[] args){
-        String serverName = args[0];
-        QAClient client = new QAClient();
-        client.run(serverName);
-    }
-
-    /**
-     *
-     * Connects to the server on IP address serverName and port number portNumber.
-     */
     protected Socket connectToServer(String serverName) {
         Socket res = null;
         try {
@@ -38,7 +28,7 @@ public class QAClient {
         Socket socket = connectToServer(serverName);
 
         if(socket != null){
-            ArrayBlockingQueue<QA> senderQueue = new ArrayBlockingQueue<QA>(100);
+            ArrayBlockingQueue<QA> senderQueue = new ArrayBlockingQueue<>(100);
             ClientQASender sender = new ClientQASender(socket, senderQueue);
             ClientQAReceiver receiver = new ClientQAReceiver(socket);
             Thread t1 = new Thread(sender);
@@ -67,8 +57,12 @@ public class QAClient {
             }
 
             System.out.println("Client main thread terminated.");
-
-
         }
     }
+    public static void main(String[] args){
+        String serverName = args[0];
+        QAClient client = new QAClient();
+        client.run(serverName);
+    }
+
 }

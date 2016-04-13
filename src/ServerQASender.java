@@ -20,13 +20,11 @@ public class ServerQASender implements Runnable {
 
     @Override
     public void run() {
-        BufferedReader stdin;
         Scanner scanner;
         ObjectOutputStream outputStream;
-        QA qa = null;
+        QA qa;
         String answer;
         try{
-            //stdin = new BufferedReader(new InputStreamReader(System.in));
             scanner = new Scanner(System.in);
             outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
             while(true) {

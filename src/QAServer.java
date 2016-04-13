@@ -13,11 +13,6 @@ public class QAServer {
     private int portNumber = 40103;
     private ServerSocket serverSocket;
 
-    public static void main(String[] args){
-        QAServer server = new QAServer();
-        server.run();
-    }
-
     protected void printLocalHostAddress() {
         try {
             InetAddress localhost = InetAddress.getLocalHost();
@@ -70,17 +65,22 @@ public class QAServer {
             Socket clientSocket = waitForConnectionFromClient();
             if(clientSocket != null) {
                 System.out.println("New client connected: " + clientSocket);
-                ArrayBlockingQueue<QA> queue = new ArrayBlockingQueue<QA>(100);
+                ArrayBlockingQueue<QA> queue = new ArrayBlockingQueue<>(100);
                 ServerQAReceiver receiver = new ServerQAReceiver(clientSocket, queue);
                 ServerQASender sender = new ServerQASender(clientSocket, queue);
                 Thread t1 = new Thread(receiver);
                 Thread t2 = new Thread(sender);
                 t1.start();
                 t2.start();
-                clientSocket = null;
+
             }
 
         }
+    }
+
+    public static void main(String[] args){
+        QAServer server = new QAServer();
+        server.run();
     }
 
 }

@@ -20,8 +20,8 @@ public class ClientQASender implements Runnable {
 
     @Override
     public void run() {
-        QA current = null;
-        ObjectOutputStream outputStream = null;
+        QA current;
+        ObjectOutputStream outputStream;
         try {
             outputStream = new ObjectOutputStream(socket.getOutputStream());
             while (true) {
