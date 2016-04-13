@@ -27,6 +27,8 @@ public class ServerQAReceiver implements Runnable {
                 if(qa.getQuestion() == null) break;
             }
 
+            inputStream.close();
+
         }catch (Exception e){
             e.printStackTrace();
         }

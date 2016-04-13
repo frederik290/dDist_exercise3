@@ -31,6 +31,7 @@ public class ClientQASender implements Runnable {
 
 
             }
+            outputStream.close();
 
 
 

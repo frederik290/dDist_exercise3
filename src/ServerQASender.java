@@ -43,6 +43,9 @@ public class ServerQASender implements Runnable {
                 }
 
             }
+            scanner.close();
+            outputStream.close();
+            clientSocket.close();
         } catch (Exception e){
             e.printStackTrace();
         }

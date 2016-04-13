@@ -25,7 +25,7 @@ public class ClientQAReceiver implements Runnable {
                 if(response.getAnswer() == null) break;
                 System.out.println("\nThe answer to question '" + response.getQuestion() + "' is '" + response.getAnswer() + "'.");
             }
-
+            inputStream.close();
             socket.close();
         } catch (Exception e){
             e.printStackTrace();

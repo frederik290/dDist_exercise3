@@ -60,9 +60,12 @@ public class QAClient {
                 qa.setQuestion(null);
                 senderQueue.put(qa);
 
+                stdin.close();
+
             }catch (Exception e){
                 e.printStackTrace();
             }
+
             System.out.println("Client main thread terminated.");
 
 
