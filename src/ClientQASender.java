@@ -31,9 +31,6 @@ public class ClientQASender implements Runnable {
 
 
             }
-            outputStream.close();
-
-
 
         } catch (Exception e){
             e.printStackTrace();
