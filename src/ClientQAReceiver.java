@@ -23,10 +23,10 @@ public class ClientQAReceiver implements Runnable {
             while(true){
                 response = (QA) inputStream.readObject();
                 if(response.getAnswer() == null) break;
-                System.out.println("The answer to question '" + response.getQuestion() + "' is '" + response.getAnswer() + "'.");
+                System.out.println("\nThe answer to question '" + response.getQuestion() + "' is '" + response.getAnswer() + "'.");
             }
 
-
+            socket.close();
         } catch (Exception e){
             e.printStackTrace();
         }

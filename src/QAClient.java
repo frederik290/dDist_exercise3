@@ -55,7 +55,7 @@ public class QAClient {
                     senderQueue.put(qa);
                 }
 
-                System.out.println("Inserting null into queue");
+                System.out.println("Inserting null into queue and shutting down threads.");
                 qa = new QA();
                 qa.setQuestion(null);
                 senderQueue.put(qa);
@@ -63,6 +63,7 @@ public class QAClient {
             }catch (Exception e){
                 e.printStackTrace();
             }
+            System.out.println("Client main thread terminated.");
 
 
         }

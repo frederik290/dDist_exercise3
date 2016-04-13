@@ -71,10 +71,10 @@ public class QAServer {
             if(clientSocket != null) {
                 System.out.println("New client connected: " + clientSocket);
                 ArrayBlockingQueue<QA> queue = new ArrayBlockingQueue<QA>(100);
-                ServerQASender sender = new ServerQASender(clientSocket, queue);
                 ServerQAReceiver receiver = new ServerQAReceiver(clientSocket, queue);
-                Thread t1 = new Thread(sender);
-                Thread t2 = new Thread(receiver);
+                ServerQASender sender = new ServerQASender(clientSocket, queue);
+                Thread t1 = new Thread(receiver);
+                Thread t2 = new Thread(sender);
                 t1.start();
                 t2.start();
                 clientSocket = null;

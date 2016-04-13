@@ -31,9 +31,8 @@ public class ServerQASender implements Runnable {
             outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
             while(true) {
                 qa = queue.take();
-                System.out.println("Waiting?");
                 if(qa.getQuestion() != null){
-                    System.out.println("Answer this question: '" + qa.getQuestion() + "':");
+                    System.out.println("\nAnswer this question: '" + qa.getQuestion() + "':");
                     answer = scanner.nextLine();
                     qa.setAnswer(answer);
                     outputStream.writeObject(qa);
